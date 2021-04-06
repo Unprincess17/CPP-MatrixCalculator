@@ -17,6 +17,16 @@ public:
 		row.push_back(col);
 	}
 
+	//Constructor for square matrix(rownum * rownum)
+	Matrix(int rownum) {
+		{
+			for (int i = 0; i != rownum; ++i) {
+				colV colrow(rownum, 0.0);
+				row.push_back(colrow);
+			}
+		}
+	}
+
 	//Constructor for Matrix O(rownum*colnum)
 	Matrix(int rownum, int colnum)
 	{
@@ -25,7 +35,6 @@ public:
 			row.push_back(colrow);
 		}
 	}
-
 	//Constructor for well-defined Matrix, Parameters: rowV _col
 	Matrix(rowV _row) :
 		row(_row)
@@ -116,20 +125,25 @@ bool Matrix::ifsquare()
 Matrix Matrix::TMatrix()
 {
 	rowV::size_type rownum = row.size();
-	rowV::size_type colnum = row[0].size();
-	for (rowV::size_type i = 0; i != row.size(); ++i) {
-		for (colV::size_type j = 0; j != row[i].size(); ++j) {
-
+	colV::size_type colnum = row[0].size();//col.size
+	Matrix Tm = Matrix(colnum, rownum);
+	for (int i = 0; i != rownum; ++i) {
+		for (int j = 0; j != colnum; ++j) {
+			Tm.row[j][i] = row[i][j];
 		}
 	}
-	return Matrix();
+	return Tm;
 }
 ;
 
-//TODO: IMatrix
+//Generate a side Matrix whose size is equal to its father
 Matrix Matrix::IMatrix() {
 	if (Matrix::ifsquare()) {
-
+		rowV::size_type rownum = row.size();
+		Matrix _IMatrix = Matrix(rownum);
+		for (int i = 1; i != rownum+1; ++i) {
+			_IMatrix.reload(i, i, 1);
+		}
+		return _IMatrix;
 	}
-	return Matrix();
 };

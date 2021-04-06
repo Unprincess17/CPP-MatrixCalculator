@@ -1,10 +1,8 @@
-﻿﻿
-#include <iostream>
-#include<vector>
+﻿#include<iostream>	
 
 #include "Matrix.h"
 
-using namespace std;
+//using namespace std;
 
 //实数矩阵运算器
 // 
@@ -33,18 +31,9 @@ using namespace std;
 
 
 int main() {
-	rowV row1;
-	colV col1{ 0.0 };
-	colV col2{ 2.0, 3.0,4.0 };
-	row1.push_back(col1);
-	row1.push_back(col2);
-	Matrix m(row1);
+	Matrix m = Matrix(2);
 	m.show();
-	m.check();
-	m.show();
-	Matrix m1(3, 2);
-	m1.show();
-	m1.reload(34, 2, 1);
+	Matrix m1 = m.IMatrix();
 	m1.show();
 	cout << endl << "END";
 };
