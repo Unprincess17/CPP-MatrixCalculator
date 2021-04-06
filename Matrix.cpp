@@ -1,7 +1,9 @@
-﻿#include <iostream>
+﻿﻿
+#include <iostream>
 #include<vector>
 
 #include "Matrix.h"
+
 using namespace std;
 
 //实数矩阵运算器
@@ -28,16 +30,21 @@ using namespace std;
 //How to save a matrix
 // By using Vector
 //
-//
+
 
 int main() {
-	colV col1;
-	rowV row1{ 0.0, 1.0 };
-	rowV row2{ 2.0, 3.0 };
-	col1.push_back(row1);
-	col1.push_back(row2);
-	Matrix m(col1);
-	
+	rowV row1;
+	colV col1{ 0.0 };
+	colV col2{ 2.0, 3.0,4.0 };
+	row1.push_back(col1);
+	row1.push_back(col2);
+	Matrix m(row1);
 	m.show();
-	cout << endl<< "END";
+	m.check();
+	m.show();
+	Matrix m1(3, 2);
+	m1.show();
+	m1.reload(34, 2, 1);
+	m1.show();
+	cout << endl << "END";
 };

@@ -1,54 +1,135 @@
 #include <iostream>
 #include<vector>
-using namespace std;
+	using namespace std;
 
-typedef vector<vector<double>> colV;
-typedef vector<double> rowV;
+typedef vector<vector<double>> rowV;
+typedef vector<double> colV;
 
 class Matrix {
 private:
-	vector<vector<double>> col;
+	vector<vector<double>> row;
 
 public:
+	//Default Constructor, Generate [[0.0]]
+	Matrix() {
+		colV col;
+		col.push_back(0.0);
+		row.push_back(col);
+	}
+
+	//Constructor for Matrix O(rownum*colnum)
+	Matrix(int rownum, int colnum)
+	{
+		for (int i = 0; i != rownum; ++i) {
+			colV colrow(colnum, 0.0);
+			row.push_back(colrow);
+		}
+	}
+
+	//Constructor for well-defined Matrix, Parameters: rowV _col
+	Matrix(rowV _row) :
+		row(_row)
+	{}
+
+	//check, and conpensate for the offset
+	void check();
+
+	//print the matrix
 	void show();
 
-	void reload(int colnum, int rownum, double renum);
+	//change element's value of matrix 
+	void reload(rowV::size_type rownum, colV::size_type colnum, double renum);
 
+	//calculate the determination of matrix
 	double determination();
 
+	//Check if the Matrix is a square
+	bool ifsquare();
+
+	// generate the Unit matrix of itself
 	Matrix IMatrix();
 
-	//Constructor for test, an pre-input matrix m
-	//
-	Matrix(colV col0) :
-		col(col0)
-	{}
-}; 
+	// transpose the matrix
+	Matrix TMatrix();
+};
 
-
-void Matrix::show() {
-	for (colV::size_type i = 0; i != col.size(); ++i) {
-		for (rowV::size_type j = 0; j != col[i].size(); ++j) {
-			cout << col[i][j] << ' ';
+//check the Matrix 's integrity
+void Matrix::check()
+{
+	rowV::size_type  t = Matrix::row[0].size();
+	//遍历寻找最长的col
+	for (rowV::iterator iterrow = row.begin(); iterrow != row.end(); ++iterrow) {
+		if ((*iterrow).size() > t) {
+			t = iterrow->size();
 		}
-		cout << endl;
+	}
+	//记录最长的row的长度为length
+	rowV::size_type length = t;
+	//在不为length长度的后面增加到length的长度
+	for (rowV::size_type i = 0; i != row.size(); ++i) {
+		for (colV::size_type isize = row[i].size(); isize != length; ++isize) {
+			row[i].push_back(0);
+		}
 	}
 }
 
-//three parameters: int colnum, int rownum, renum
-void Matrix::reload(int colnum, int rownum, double renum) {
-	col[colnum][rownum] = renum;
-};
+//show the Matrix by col * row
+void Matrix::show() {
+	for (rowV::size_type i = 0; i != row.size(); ++i) {
+		for (colV::size_type j = 0; j != row[i].size(); ++j) {
+			cout << row[i][j] << ' ';
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
 
+//three parameters: int rownum, int colnum, renum
+void Matrix::reload(rowV::size_type rownum, colV::size_type colnum, double renum) {
+	if (rownum > 0 && rownum <= row.size()) {
+		if (colnum > 0 && colnum <= row[0].size()) {
+			row[rownum - 1][colnum - 1] = renum;
+		}
+	}
+	else {
+		cout << "index out of bounds!,please try correct index" << endl;
+		//How to catch this exception?
+		//	Matrix::reload(rownum, colnum, renum);
+	}
+};
 
 //TODO: Determination
 double Matrix::determination() {
 
 	return 0;
-};
+}
+
+// judge if the Matrix is a square
+bool Matrix::ifsquare()
+{
+	bool issqure = false;
+	if (row.size() == row[1].size()) { issqure = true; }
+	return issqure;
+}
+
+//Calculate the transpose matrix
+Matrix Matrix::TMatrix()
+{
+	rowV::size_type rownum = row.size();
+	rowV::size_type colnum = row[0].size();
+	for (rowV::size_type i = 0; i != row.size(); ++i) {
+		for (colV::size_type j = 0; j != row[i].size(); ++j) {
+
+		}
+	}
+	return Matrix();
+}
+;
 
 //TODO: IMatrix
-//Matrix IMatrix(int n) {
-//	return ;
-//};
+Matrix Matrix::IMatrix() {
+	if (Matrix::ifsquare()) {
 
+	}
+	return Matrix();
+};
