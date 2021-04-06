@@ -53,14 +53,33 @@ public:
 	double determination();
 
 	//Check if the Matrix is a square
-	bool ifsquare();
+	bool issquare();
 
 	// generate the Unit matrix of itself
 	Matrix IMatrix();
 
 	// transpose the matrix
 	Matrix TMatrix();
+
+	// change rowm and rown
+	void changeRow(int i, int j);
+
+	// change colm and coln
+	void changeCol(int i, int j);
+
+	// Multiply by scaler
+	Matrix scaleMulti(Matrix m, int scale);
+
+	// Add Matrix m and Matrix n
+	Matrix add(Matrix m, Matrix n);
+
+	// Reverse the Matrix m
+	Matrix reverse(Matrix m, Matrix n);
+
+	// Count the eigen number
+	Matrix eigen(Matrix m);
 };
+
 
 //check the Matrix 's integrity
 void Matrix::check()
@@ -109,15 +128,18 @@ void Matrix::reload(rowV::size_type rownum, colV::size_type colnum, double renum
 
 //TODO: Determination
 double Matrix::determination() {
-
+	if (Matrix::issquare()) {
+		double deter = 0.0;
+		//≤ªœÎ–¥
+	}
 	return 0;
 }
 
 // judge if the Matrix is a square
-bool Matrix::ifsquare()
+bool Matrix::issquare()
 {
 	bool issqure = false;
-	if (row.size() == row[1].size()) { issqure = true; }
+	if (row.size() == row[0].size()) { issqure = true; }
 	return issqure;
 }
 
@@ -134,11 +156,10 @@ Matrix Matrix::TMatrix()
 	}
 	return Tm;
 }
-;
 
 //Generate a side Matrix whose size is equal to its father
 Matrix Matrix::IMatrix() {
-	if (Matrix::ifsquare()) {
+	if (Matrix::issquare()) {
 		rowV::size_type rownum = row.size();
 		Matrix _IMatrix = Matrix(rownum);
 		for (int i = 1; i != rownum+1; ++i) {
@@ -146,4 +167,59 @@ Matrix Matrix::IMatrix() {
 		}
 		return _IMatrix;
 	}
+	else {
+		return Matrix();}
 };
+
+
+ void Matrix::changeRow(int i, int j)
+{
+	 --i;
+	 --j;
+	 int size = row.size();
+	 if (i <= size && i > 0 && j <= size && j > 0) {
+		 colV tmp = colV(row[j]);
+		 row[j] = row[i];
+		 row[i] = tmp;
+	 }
+	 else {
+		 cout << "Index out of bounds!" << endl;
+	 }
+}
+
+void Matrix::changeCol(int i, int j)
+{
+	--i;
+	--j;
+	const int SIZE = row.size();
+	int *tmp = new int[SIZE];
+	for (int t = 0; t != SIZE; ++t) {
+		tmp[t] = row[i][t];
+		row[i][t] = row[j][t];
+	}
+	for (int t = 0; t != SIZE; ++t) {
+		row[j][t] = tmp[t];
+	}
+	delete[] tmp;
+}
+
+ Matrix Matrix::scaleMulti(Matrix m, int scale)
+{
+	return Matrix();
+}
+
+ Matrix Matrix::add(Matrix m, Matrix n)
+{
+	return Matrix();
+}
+
+ Matrix Matrix::reverse(Matrix m, Matrix n)
+{
+	return Matrix();
+}
+
+ Matrix Matrix::eigen(Matrix m)
+{
+	return Matrix();
+}
+;

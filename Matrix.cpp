@@ -31,9 +31,12 @@
 
 
 int main() {
-	Matrix m = Matrix(2);
-	m.show();
-	Matrix m1 = m.IMatrix();
-	m1.show();
+	Matrix m = Matrix(4);
+	Matrix B = m.IMatrix();
+	B.show();
+	B.changeRow(5, 6);
+	B.show();
+	B.changeCol(1, 3);
+	B.show();
 	cout << endl << "END";
 };
