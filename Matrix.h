@@ -64,23 +64,26 @@ public:
 	//Check if the Matrix is a square
 	bool issquare();
 
-	// generate the Unit matrix of itself
-	Matrix IMatrix();
-
-	// transpose the matrix
-	Matrix TMatrix();
-
 	// change rowm and rown
 	void changeRow(int i, int j);
 
 	// change colm and coln
 	void changeCol(int i, int j);
 
+	// generate the Unit matrix of itself
+	Matrix IMatrix();
+
+	// transpose the matrix
+	Matrix TMatrix();
+	
+	// Add Matrix m and Matrix n
+	Matrix add(Matrix n);
+
 	// Multiply by scaler
 	Matrix scaleMulti(double scale);
 
-	// Add Matrix m and Matrix n
-	Matrix add(Matrix n);
+	// Mutiple with another matrix
+	Matrix matrixMulti(Matrix n);
 
 	// count (double) algebraic cofactor
 	double algeCof(rowV::size_type i, colV::size_type j);
@@ -219,19 +222,6 @@ void Matrix::changeCol(int i, int j)
 	delete[] tmp;
 }
 
-// generate a Matrix by scaling
- Matrix Matrix::scaleMulti(double scale)
-{
-	 Matrix mr = Matrix(row);
-	 for (rowV::size_type i = 0; i != row.size(); ++i) {
-		 for (colV::size_type j = 0; j != row[0].size(); ++j) {
-			 mr.row[i][j] *= scale;
-		 }
-	 
-	 }
-	return mr;
-}
-
  // generate a matrix by add this matrix and matrix n
  Matrix Matrix::add(Matrix n)
 {
@@ -255,6 +245,37 @@ void Matrix::changeCol(int i, int j)
 	 return mr;
 }
 
+ // generate a Matrix by scaling
+ Matrix Matrix::scaleMulti(double scale)
+{
+	 Matrix mr = Matrix(row);
+	 for (rowV::size_type i = 0; i != row.size(); ++i) {
+		 for (colV::size_type j = 0; j != row[0].size(); ++j) {
+			 mr.row[i][j] *= scale;
+		 }
+	 }
+	return mr;
+}
+
+ // generate matrix by mutiply calling matrix and matrix n
+ Matrix Matrix::matrixMulti(Matrix n)
+ {
+	 Matrix mr = Matrix(row.size(), n.row[0].size());
+	 if (row[0].size() == n.row.size()) {
+		 for (int i = 0; i != mr.row.size(); ++i) {
+			 for (int j = 0; j != mr.row[0].size(); ++j) {
+				 for (int k = 0; k != row[0].size(); ++k) {
+					 mr.row[i][j] += row[i][k] * n.row[k][j];
+				 }
+			 }
+		 }
+	 }
+	 else {
+		 cout << "Cannot multiply!" << endl;
+	 }
+	 return mr;
+ }
+
  // TODO: count (double) algebraic cofactor
  double Matrix::algeCof(rowV::size_type i, colV::size_type j) {
 	 double algecof = 0.0;
@@ -262,7 +283,7 @@ void Matrix::changeCol(int i, int j)
 	 return algecof;
  }
 
- //TODO: Generate the adjugate matrix
+ //Generate the adjugate matrix
  Matrix Matrix::adjugate()
  {
 	 Matrix mr(row);
@@ -279,10 +300,11 @@ void Matrix::changeCol(int i, int j)
 	 return mr;
  }
 
+ //Generate the reversed Matrix
  Matrix Matrix::reverse()
 {
 	 Matrix mr = Matrix(row);
-	 if (issquare) {
+	 if (issquare()) {
 		 if (determination() != 0 && 1e-6 < abs(determination())) {
 			 mr = adjugate().scaleMulti((1 / determination()));
 		 }
