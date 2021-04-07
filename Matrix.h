@@ -144,13 +144,22 @@ void Matrix::reload(rowV::size_type rownum, colV::size_type colnum, double renum
 	}
 };
 
-//TODO: Determination
+//FIXME: Determination
 double Matrix::determination() {
-	if (Matrix::issquare()) {
-		double deter = 0.0;
-		//≤ªœÎ–¥
+	double deter = 0.0;
+	if (row.size() == 1) {
+		deter = row[0][0];
 	}
-	return 0;
+	else {
+		if (Matrix::issquare()) {
+			for (rowV::size_type i = 0; i != row.size(); ++i) {
+				for (colV::size_type j = 0; j != row[0].size(); ++j) {
+					deter += pow(-1, i + j) * algeCof(i + 1, j + 1);
+				}
+			}
+		}
+	}
+	return deter;
 }
 
 // judge if the Matrix is a square
@@ -190,36 +199,44 @@ Matrix Matrix::IMatrix() {
 };
 
 // Change row i and row j, where i and j greater than 0
- void Matrix::changeRow(int i, int j)
+void Matrix::changeRow(int i, int j)
 {
-	 --i;
-	 --j;
-	 int size = row.size();
-	 if (i <= size && i > 0 && j <= size && j > 0) {
-		 colV tmp = colV(row[j]);
-		 row[j] = row[i];
-		 row[i] = tmp;
-	 }
-	 else {
-		 cout << "Index out of bounds!" << endl;
-	 }
+	if (i > 0 && i <= row.size()) {
+		if (j > 0 && j <= row[0].size()) {
+			--i;
+			--j;
+			int size = row.size();
+			if (i <= size && i > 0 && j <= size && j > 0) {
+				colV tmp = colV(row[j]);
+				row[j] = row[i];
+				row[i] = tmp;
+			}
+			else {
+				cout << "Index out of bounds!" << endl;
+			}
+		}
+	}
 }
 
  // Change col i and col j, where i and j greater than 0
 void Matrix::changeCol(int i, int j)
 {
-	--i;
-	--j;
-	const int SIZE = row.size();
-	int *tmp = new int[SIZE];
-	for (int t = 0; t != SIZE; ++t) {
-		tmp[t] = row[i][t];
-		row[i][t] = row[j][t];
+	if (i > 0 && i <= row.size()) {
+		if (j > 0 && j <= row[0].size()) {
+			--i;
+			--j;
+			const int SIZE = row.size();
+			int* tmp = new int[SIZE];
+			for (int t = 0; t != SIZE; ++t) {
+				tmp[t] = row[i][t];
+				row[i][t] = row[j][t];
+			}
+			for (int t = 0; t != SIZE; ++t) {
+				row[j][t] = tmp[t];
+			}
+			delete[] tmp;
+		}
 	}
-	for (int t = 0; t != SIZE; ++t) {
-		row[j][t] = tmp[t];
-	}
-	delete[] tmp;
 }
 
  // generate a matrix by add this matrix and matrix n
@@ -276,10 +293,30 @@ void Matrix::changeCol(int i, int j)
 	 return mr;
  }
 
- // TODO: count (double) algebraic cofactor
- double Matrix::algeCof(rowV::size_type i, colV::size_type j) {
+ // FIXME: count (double) algebraic cofactor
+ double Matrix::algeCof(rowV::size_type rownum, colV::size_type colnum) {
 	 double algecof = 0.0;
-
+	 if (issquare()) {
+		 if (rownum > 0 && rownum <= row.size()) {
+			 if (colnum > 0 && colnum <= row[0].size()) {
+				 --rownum;
+				 --colnum;
+				 Matrix tmp(row);
+				 Matrix mr(row.size() - 1);
+				 tmp.changeCol(colnum, 1);
+				 tmp.changeRow(rownum, 1);
+				 for (rowV::size_type i = 0; i != row.size() - 1; ++i) {
+					 for (colV::size_type j = 0; j != row[0].size() - 1; ++j) {
+						 mr.row[i][j] = row[i + 1][j + 1];
+					 }
+				 }
+				 algecof = mr.determination();
+			 }
+		 }
+	 }
+	 else {
+		 cout << "Not a square!" << endl;
+	 }
 	 return algecof;
  }
 

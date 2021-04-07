@@ -38,11 +38,9 @@ int main() {
 	col1.push_back(2.0);
 	col1.push_back(3.0);
 	colV col2{4.0, 5.0, 6.0};
-	rowV row{ col1,col2 };
+	colV col3{ 7.0,8.0,9.0 };
+	rowV row{ col1,col2,col3 };
 	Matrix m2 = Matrix(row);
-	m2.show();
-	m1.show();
-	Matrix m3 = m1.matrixMulti(m2);
-	m3.show();
+	cout<<m2.algeCof(1, 1);
 
 };
