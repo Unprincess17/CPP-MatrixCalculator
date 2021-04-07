@@ -68,16 +68,16 @@ public:
 	void changeCol(int i, int j);
 
 	// Multiply by scaler
-	Matrix scaleMulti(Matrix m, int scale);
+	Matrix scaleMulti(int scale);
 
 	// Add Matrix m and Matrix n
-	Matrix add(Matrix m, Matrix n);
+	Matrix add(Matrix n);
 
 	// Reverse the Matrix m
-	Matrix reverse(Matrix m, Matrix n);
+	Matrix reverse();
 
 	// Count the eigen number
-	Matrix eigen(Matrix m);
+	Matrix eigen();
 };
 
 
@@ -203,22 +203,39 @@ void Matrix::changeCol(int i, int j)
 	delete[] tmp;
 }
 
- Matrix Matrix::scaleMulti(Matrix m, int scale)
+ Matrix Matrix::scaleMulti(int scale)
 {
 	return Matrix();
 }
 
- Matrix Matrix::add(Matrix m, Matrix n)
+ Matrix Matrix::add(Matrix n)
+{
+	 Matrix mr = Matrix(row.size(), row[0].size());
+	 if (row.size() == n.row.size()) {
+		 if (row[0].size() == n.row[0].size()) {
+			 for (rowV::size_type i = 0; i != row.size(); ++i) {
+				 for (colV::size_type j = 0; j != row[0].size(); ++j) {
+					 mr.row[i][j] = row[i][j] + n.row[i][j];
+					 
+				 }
+			 }
+		 }
+		 else {
+			 cout << "unequal coloum size" << endl;
+		 }
+	 }
+	 else {
+		 cout << " unequal row size" << endl;
+	 }
+	 return mr;
+}
+
+ Matrix Matrix::reverse()
 {
 	return Matrix();
 }
 
- Matrix Matrix::reverse(Matrix m, Matrix n)
-{
-	return Matrix();
-}
-
- Matrix Matrix::eigen(Matrix m)
+ Matrix Matrix::eigen()
 {
 	return Matrix();
 }

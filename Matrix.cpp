@@ -33,10 +33,10 @@
 int main() {
 	Matrix m = Matrix(4);
 	Matrix B = m.IMatrix();
-	B.show();
-	B.changeRow(5, 6);
-	B.show();
-	B.changeCol(1, 3);
-	B.show();
+	Matrix C = B.add(B);
+	C.show();
+	Matrix m1 = Matrix(5);
+	C = B.add(m1);
+	C.show();
 	cout << endl << "END";
 };
