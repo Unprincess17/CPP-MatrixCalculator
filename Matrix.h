@@ -1,6 +1,8 @@
-#include <iostream>
+#include<iostream>
+#include<cmath>
 #include<vector>
-	using namespace std;
+using namespace std;
+
 
 typedef vector<vector<double>> rowV;
 typedef vector<double> colV;
@@ -75,10 +77,16 @@ public:
 	void changeCol(int i, int j);
 
 	// Multiply by scaler
-	Matrix scaleMulti(int scale);
+	Matrix scaleMulti(double scale);
 
 	// Add Matrix m and Matrix n
 	Matrix add(Matrix n);
+
+	// count (double) algebraic cofactor
+	double algeCof(rowV::size_type i, colV::size_type j);
+
+	// Generate Adjugate Matrix
+	Matrix adjugate();
 
 	// Reverse the Matrix m
 	Matrix reverse();
@@ -127,9 +135,9 @@ void Matrix::reload(rowV::size_type rownum, colV::size_type colnum, double renum
 		}
 	}
 	else {
-		cout << "index out of bounds!,please try correct index" << endl;
-		//How to catch this exception?
+		//XXX: How to catch this exception?
 		//	Matrix::reload(rownum, colnum, renum);
+		cout << "index out of bounds!,please try correct index" << endl;
 	}
 };
 
@@ -178,7 +186,7 @@ Matrix Matrix::IMatrix() {
 		return Matrix();}
 };
 
-
+// Change row i and row j, where i and j greater than 0
  void Matrix::changeRow(int i, int j)
 {
 	 --i;
@@ -194,6 +202,7 @@ Matrix Matrix::IMatrix() {
 	 }
 }
 
+ // Change col i and col j, where i and j greater than 0
 void Matrix::changeCol(int i, int j)
 {
 	--i;
@@ -210,7 +219,8 @@ void Matrix::changeCol(int i, int j)
 	delete[] tmp;
 }
 
- Matrix Matrix::scaleMulti(int scale)
+// generate a Matrix by scaling
+ Matrix Matrix::scaleMulti(double scale)
 {
 	 Matrix mr = Matrix(row);
 	 for (rowV::size_type i = 0; i != row.size(); ++i) {
@@ -222,6 +232,7 @@ void Matrix::changeCol(int i, int j)
 	return mr;
 }
 
+ // generate a matrix by add this matrix and matrix n
  Matrix Matrix::add(Matrix n)
 {
 	 Matrix mr = Matrix(n);
@@ -244,12 +255,45 @@ void Matrix::changeCol(int i, int j)
 	 return mr;
 }
 
+ // TODO: count (double) algebraic cofactor
+ double Matrix::algeCof(rowV::size_type i, colV::size_type j) {
+	 double algecof = 0.0;
+
+	 return algecof;
+ }
+
+ //TODO: Generate the adjugate matrix
+ Matrix Matrix::adjugate()
+ {
+	 Matrix mr(row);
+	 if (mr.issquare()) {
+		 for (rowV::size_type i = 0; i != row.size(); ++i) {
+			 for (colV::size_type j = 0; j != row[0].size(); ++j) {
+				 mr.row[j][i] = algeCof(i - 1, j - 1);
+			 }
+		 }
+	 }
+	 else {
+		 cout << "Not a square!" << endl;
+	 }
+	 return mr;
+ }
+
  Matrix Matrix::reverse()
 {
-
+	 Matrix mr = Matrix(row);
+	 if (issquare) {
+		 if (determination() != 0 && 1e-6 < abs(determination())) {
+			 mr = adjugate().scaleMulti((1 / determination()));
+		 }
+	 }
+	 else {
+		 cout << "not a square" << endl;
+	 }
 	return Matrix();
 }
 
+ //TODO: ปนรปัง
  Matrix Matrix::eigen()
 {
 	return Matrix();

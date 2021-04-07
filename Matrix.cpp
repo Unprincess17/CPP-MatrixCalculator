@@ -31,5 +31,7 @@
 
 
 int main() {
-	
+	Matrix m = Matrix(5);
+	Matrix m1 = m.adjugate();
+	m1.show();
 };
