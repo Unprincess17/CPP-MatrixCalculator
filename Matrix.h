@@ -35,10 +35,17 @@ public:
 			row.push_back(colrow);
 		}
 	}
+
 	//Constructor for well-defined Matrix, Parameters: rowV _col
 	Matrix(rowV _row) :
 		row(_row)
 	{}
+
+	//Constructor for well-defined Matrix, Parameters: Matrix m
+	Matrix(const Matrix &m):
+		row(m.row)
+	{}
+
 
 	//check, and conpensate for the offset
 	void check();
@@ -205,12 +212,19 @@ void Matrix::changeCol(int i, int j)
 
  Matrix Matrix::scaleMulti(int scale)
 {
-	return Matrix();
+	 Matrix mr = Matrix(row);
+	 for (rowV::size_type i = 0; i != row.size(); ++i) {
+		 for (colV::size_type j = 0; j != row[0].size(); ++j) {
+			 mr.row[i][j] *= scale;
+		 }
+	 
+	 }
+	return mr;
 }
 
  Matrix Matrix::add(Matrix n)
 {
-	 Matrix mr = Matrix(row.size(), row[0].size());
+	 Matrix mr = Matrix(n);
 	 if (row.size() == n.row.size()) {
 		 if (row[0].size() == n.row[0].size()) {
 			 for (rowV::size_type i = 0; i != row.size(); ++i) {
@@ -232,6 +246,7 @@ void Matrix::changeCol(int i, int j)
 
  Matrix Matrix::reverse()
 {
+
 	return Matrix();
 }
 

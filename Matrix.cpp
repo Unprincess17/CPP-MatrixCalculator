@@ -31,12 +31,5 @@
 
 
 int main() {
-	Matrix m = Matrix(4);
-	Matrix B = m.IMatrix();
-	Matrix C = B.add(B);
-	C.show();
-	Matrix m1 = Matrix(5);
-	C = B.add(m1);
-	C.show();
-	cout << endl << "END";
+	
 };
