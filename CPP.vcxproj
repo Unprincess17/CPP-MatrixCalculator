@@ -140,10 +140,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="commandControl.h" />
     <ClInclude Include="Matrix.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="commandControl.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="show.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

@@ -18,9 +18,18 @@
     <ClInclude Include="Matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="commandControl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Matrix.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="commandControl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="show.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
