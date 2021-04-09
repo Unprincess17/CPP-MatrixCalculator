@@ -269,7 +269,7 @@ void Matrix::changeCol(int i, int j)
  }
 
 
-//FIXME: Determination
+// Determination
 double Matrix::determination() {
 	double deter = 0.0;
 	if (Matrix::issquare()) {
@@ -286,9 +286,10 @@ double Matrix::determination() {
 		}
 	}
 	cout << "Not a square! No determination" << endl;
+	return deter;
 }
 
- // FIXME: count (double) algebraic cofactor
+ // count (double) algebraic cofactor
  double Matrix::algeCof(rowV::size_type rownum, colV::size_type colnum) {
 	 double algecof = 0.0;
 	 if (row.size() == 1 && row[0].size() == 1) {
@@ -329,7 +330,7 @@ double Matrix::determination() {
 	 if (mr.issquare()) {
 		 for (rowV::size_type i = 0; i != row.size(); ++i) {
 			 for (colV::size_type j = 0; j != row[0].size(); ++j) {
-				 mr.row[j][i] = algeCof(i - 1, j - 1);
+				 mr.row[j][i] = algeCof(i, j);
 			 }
 		 }
 	 }
@@ -347,11 +348,14 @@ double Matrix::determination() {
 		 if (determination() != 0 && 1e-6 < abs(determination())) {
 			 mr = adjugate().scaleMulti((1 / determination()));
 		 }
+		 else {
+			 cout << "Determination is zero, So no reverse!" << endl;
+		 }
 	 }
 	 else {
 		 cout << "not a square, no reverse" << endl;
 	 }
-	return Matrix();
+	return mr;
 }
 
  //TODO: ปนรปัง
