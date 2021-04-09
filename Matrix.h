@@ -278,17 +278,11 @@ double Matrix::determination() {
 			return deter;
 		}
 		else {
-			// TODO: delete it
-			int count = 0;
-			for (rowV::size_type i = 0; i != row.size(); ++i) {
-				for (colV::size_type j = 0; j != row[0].size(); ++j) {
-					deter += pow(-1, i + j) * algeCof(i, j);
-					// TODO: delete it
-					++count;
-					cout << "Called by " << count << "times" << endl;
-				}
-			return deter;
+			for (colV::size_type j = 0; j != row[0].size(); ++j) {
+				deter += row[0][j] * algeCof(0, j);
 			}
+			return deter;
+
 		}
 	}
 	cout << "Not a square! No determination" << endl;
