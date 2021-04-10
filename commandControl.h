@@ -1,4 +1,3 @@
-#pragma once
 #include "Matrix.h"
 class commandControl :
     public Matrix

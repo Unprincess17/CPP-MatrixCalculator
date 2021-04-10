@@ -1,8 +1,8 @@
 #include<iostream>
 #include<cmath>
 #include<vector>
-using namespace std;
 
+using namespace std;
 
 typedef vector<vector<double>> rowV;
 typedef vector<double> colV;
