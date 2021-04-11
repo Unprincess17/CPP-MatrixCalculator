@@ -1,7 +1,4 @@
-#include<iostream>
-#include<cmath>
 #include<vector>
-
 using namespace std;
 
 typedef vector<vector<double>> rowV;

@@ -1,4 +1,7 @@
 ﻿#include<iostream>	
+#include<cmath>
+#include<vector>
+#include<iomanip>
 
 #include "Matrix.h"
 
@@ -28,7 +31,7 @@ void Matrix::check()
 void Matrix::show() {
 	for (rowV::size_type i = 0; i != row.size(); ++i) {
 		for (colV::size_type j = 0; j != row[i].size(); ++j) {
-			cout << row[i][j] << ' ';
+			cout << setiosflags(ios::right) << setprecision(2) <<setw(5) <<row[i][j] << ' ';
 		}
 		cout << endl;
 	}

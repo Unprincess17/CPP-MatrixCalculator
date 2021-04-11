@@ -13,7 +13,6 @@ int main() {
 	colV col3{ 7.0,8.0, 10.0 };
 	rowV row{ col1,col2, col3 };
 	Matrix m2 = Matrix(row);
-	cout << m2.determination() << endl;
 	m2.show();
 	Matrix m3 = m2.reverse();
 	m3.show();
