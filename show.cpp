@@ -16,6 +16,16 @@ int main() {
 	m2.show();
 	Matrix m3 = m2.reverse();
 	m3.show();
+	m3.addCol(2, 1);
+	m3.show();
+	m3.addRow(1, 2);
+	m3.show();
+	m3.multiCol(2, 2);
+	m3.show();
+	m3.multiRow(2, 2);
+	m3.show();
+	/*commandControl cmd;
+	cmd.circulation();*/
 
 };
 

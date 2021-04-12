@@ -3,10 +3,8 @@ class commandControl :
     public Matrix
 {
 public:
-    void show();
+    void welcome();
 
     void circulation();
-
-    void _exit();
 };
 

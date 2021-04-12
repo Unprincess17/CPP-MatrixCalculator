@@ -123,6 +123,58 @@ void Matrix::changeCol(int i, int j)
 	}
 }
 
+void Matrix::addRow(rowV::size_type rownew, rowV::size_type rowold)
+{
+	if (rownew != rowold) {
+		if (rownew >= 0 && rownew <= row.size() && rowold >= 0 && rowold <= row.size()) {
+			for(rowV::size_type i = 0; i != row.size(); ++i){
+				row[rownew][i] += row[rowold][i];
+			}
+		}
+		else {
+			cout << " Row index out of bounds!" << endl;
+		}
+	}
+}
+
+void Matrix::addCol(colV::size_type colnew, colV::size_type colold)
+{
+	if (colnew != colold) {
+		if (colnew >= 0 && colnew <= row.size() && colold >= 0 && colold <= row[0].size()) {
+			for (colV::size_type i = 0; i != row[0].size(); ++i) {
+				row[i][colnew] += row[i][colold];
+			}
+		}
+		else {
+			cout << " col index out of bounds!" << endl;
+		}
+	}
+}
+
+void Matrix::multiRow(rowV::size_type rownum, double scale)
+{
+	if (rownum >= 0 && rownum <= row.size()) {
+		for (rowV::size_type i = 0; i != row.size(); ++i) {
+			row[i][rownum] *= scale;
+		}
+	}
+	else {
+		cout << " Row index out of bounds!" << endl;
+	}
+}
+
+void Matrix::multiCol(colV::size_type col, double scale)
+{
+	if (col >= 0 && col <= row[0].size()) {
+		for (colV::size_type i = 0; i != row[0].size(); ++i) {
+			row[i][col] *= scale;
+		}
+	}
+	else {
+		cout << " col index out of bounds!" << endl;
+	}
+}
+
 // generate a matrix by add this matrix and matrix n
 Matrix Matrix::add(Matrix n)
 {

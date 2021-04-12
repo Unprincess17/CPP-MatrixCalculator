@@ -67,6 +67,14 @@ public:
 	// change colm and coln
 	void changeCol(int i, int j);
 
+	void addRow(rowV::size_type rownew, rowV::size_type rowold);
+
+	void addCol(colV::size_type colnew, colV::size_type colold);
+
+	void multiRow(rowV::size_type row, double scale);
+
+	void multiCol(colV::size_type col, double scale);
+
 	// generate the Unit matrix of itself
 	Matrix IMatrix();
 
