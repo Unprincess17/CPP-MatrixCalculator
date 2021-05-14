@@ -21,6 +21,12 @@
     <ClInclude Include="commandControl.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\qtwindow\Third\mainscene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qtwindow\Third\setpages.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Matrix.cpp">
@@ -32,8 +38,28 @@
     <ClCompile Include="show.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\qtwindow\Third\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\qtwindow\Third\mainscene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\qtwindow\Third\setpages.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include="..\qtwindow\Third\Third.pro" />
+    <None Include="..\qtwindow\Third\Third.pro.user" />
+    <None Include="..\qtwindow\Third\mainscene.ui">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\qtwindow\Third\mainscene.ui.autosave">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\qtwindow\Third\res.qrc">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

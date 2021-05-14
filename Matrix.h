@@ -101,4 +101,12 @@ public:
 
 	// Count the eigen number
 	Matrix eigen();
+
+	//how to express an unknown val?
+
+	//矩阵对角化
+	Matrix diagonalize();
+
+	//矩阵上三角化
+	Matrix upperize();
 };

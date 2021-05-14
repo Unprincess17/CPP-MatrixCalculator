@@ -324,3 +324,15 @@ Matrix Matrix::eigen()
 {
 	return Matrix();
 }
+
+Matrix Matrix::diagonalize()
+{
+	return Matrix();
+}
+
+//r*c阶矩阵的上三角化
+//
+Matrix Matrix::upperize()
+{
+	return Matrix();
+}
