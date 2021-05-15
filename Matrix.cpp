@@ -176,7 +176,7 @@ void Matrix::multiCol(colV::size_type col, double scale)
 }
 
 // generate a matrix by add this matrix and matrix n
-Matrix Matrix::add(Matrix n)
+Matrix Matrix::add(Matrix &n)
 {
 	Matrix mr = Matrix(n);
 	if (row.size() == n.row.size()) {
@@ -211,7 +211,7 @@ Matrix Matrix::scaleMulti(double scale)
 }
 
 // generate matrix by mutiply calling matrix and matrix n
-Matrix Matrix::matrixMulti(Matrix n)
+Matrix Matrix::matrixMulti(Matrix &n)
 {
 	Matrix mr = Matrix((int)row.size(), (int)n.row[0].size());
 	if (row[0].size() == n.row.size()) {
@@ -325,8 +325,12 @@ Matrix Matrix::eigen()
 	return Matrix();
 }
 
-Matrix Matrix::diagonalize()
-{
+Matrix Matrix::diagonalize(Matrix &m)
+{	
+
+	if (m.issquare()) {
+
+	}
 	return Matrix();
 }
 

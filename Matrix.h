@@ -82,13 +82,13 @@ public:
 	Matrix TMatrix();
 	
 	// Add Matrix m and Matrix n
-	Matrix add(Matrix n);
+	Matrix add(Matrix &n);
 
 	// Multiply by scaler
 	Matrix scaleMulti(double scale);
 
 	// Mutiple with another matrix
-	Matrix matrixMulti(Matrix n);
+	Matrix matrixMulti(Matrix &n);
 
 	// count (double) algebraic cofactor
 	double algeCof(rowV::size_type i, colV::size_type j);
@@ -105,7 +105,7 @@ public:
 	//how to express an unknown val?
 
 	//矩阵对角化
-	Matrix diagonalize();
+	Matrix diagonalize(Matrix &m);
 
 	//矩阵上三角化
 	Matrix upperize();
