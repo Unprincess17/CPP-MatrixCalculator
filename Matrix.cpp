@@ -213,6 +213,7 @@ Matrix Matrix::scaleMulti(double scale)
 // generate matrix by mutiply calling matrix and matrix n
 Matrix Matrix::matrixMulti(Matrix &n)
 {
+	//TODO:performance here could be better, but how can you do?
 	Matrix mr = Matrix((int)row.size(), (int)n.row[0].size());
 	if (row[0].size() == n.row.size()) {
 		for (int i = 0; i != mr.row.size(); ++i) {
@@ -319,12 +320,21 @@ Matrix Matrix::reverse()
 	return mr;
 }
 
-//TODO: 还没学
+//分析：求秩、求上三角阵，实际上是在处理：怎么化简为阶梯型矩阵
+// 变化为阶梯型矩阵:
+// 1.判断应该按行还是按列计算（是否需要tranpose）->依据：row.size()和row[0].size()比较
+// 2.假设正常（行>列），寻找第一个元素不为0的一行（首先判断row[0][0]是否为0，若不是，则遍历第一列，寻找第一个元素不为0的一行，将其余第0行交换
+// 2'.如果第一列所有元素都是0，则查找第二列...也就是说，逐列查找第一个不为0的元素，若找到，返回他的行标，列标
+// 3.用这个元素将该列剩余元素置0，也就是说，只用调整从返回的行标往下的元素
+// 4.从上一个不为0的元素的下一列进行操作，重复3-4，直到处理到最后一列
+//		本征值、对角化是处理相同的问题
+//TODO: 
 Matrix Matrix::eigen()
 {
 	return Matrix();
 }
 
+//TODO:
 Matrix Matrix::diagonalize(Matrix &m)
 {	
 
@@ -334,9 +344,15 @@ Matrix Matrix::diagonalize(Matrix &m)
 	return Matrix();
 }
 
+//TODO:
 //r*c阶矩阵的上三角化
 //
 Matrix Matrix::upperize()
 {
 	return Matrix();
+}
+
+//求秩
+int Matrix::getRank() {
+
 }
