@@ -328,9 +328,24 @@ Matrix Matrix::reverse()
 // 3.用这个元素将该列剩余元素置0，也就是说，只用调整从返回的行标往下的元素
 // 4.从上一个不为0的元素的下一列进行操作，重复3-4，直到处理到最后一列
 //		本征值、对角化是处理相同的问题
+//get stepped Matrix
+Matrix Matrix::Step()
+{
+	if (row.size() > row[0].size()) {
+		Matrix step(row[0].size(),row.size());
+		//how to let Matrix(this matrix) come over the scope of if{}?
+	}
+
+
+	
+
+	return Matrix();
+}
+
 //TODO: 
 Matrix Matrix::eigen()
 {
+
 	return Matrix();
 }
 
@@ -349,6 +364,7 @@ Matrix Matrix::upperize()
 {
 	return Matrix();
 }
+
 
 //求秩
 int Matrix::getRank() {

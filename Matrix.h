@@ -106,6 +106,9 @@ public:
 	// Count the eigen number
 	Matrix eigen();
 
+	//calculate the stepped(?) Matrix
+	Matrix Step();
+
 	//¾ØÕó¶Ô½Ç»¯
 	Matrix diagonalize(Matrix& m);
 
