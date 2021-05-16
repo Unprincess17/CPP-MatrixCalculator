@@ -140,15 +140,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\qtwindow\Third\mainscene.h" />
-    <ClInclude Include="..\qtwindow\Third\setpages.h" />
-    <ClInclude Include="commandControl.h" />
     <ClInclude Include="Matrix.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\qtwindow\Third\main.cpp" />
-    <ClCompile Include="..\qtwindow\Third\mainscene.cpp" />
-    <ClCompile Include="..\qtwindow\Third\setpages.cpp" />
     <ClCompile Include="commandControl.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="show.cpp" />

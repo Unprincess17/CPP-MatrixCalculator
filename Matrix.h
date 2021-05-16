@@ -3,6 +3,10 @@ using namespace std;
 
 typedef vector<vector<double>> rowV;
 typedef vector<double> colV;
+typedef struct xy {
+	rowV::size_type x;
+	colV::size_type y;
+}xy;
 
 class Matrix {
 private:
@@ -41,7 +45,7 @@ public:
 	{}
 
 	//Constructor for well-defined Matrix, Parameters: Matrix m
-	Matrix(const Matrix &m):
+	Matrix(const Matrix& m) :
 		row(m.row)
 	{}
 
@@ -80,15 +84,15 @@ public:
 
 	// transpose the matrix
 	Matrix TMatrix();
-	
+
 	// Add Matrix m and Matrix n
-	Matrix add(Matrix &n);
+	Matrix add(Matrix& n);
 
 	// Multiply by scaler
 	Matrix scaleMulti(double scale);
 
 	// Mutiple with another matrix
-	Matrix matrixMulti(Matrix &n);
+	Matrix matrixMulti(Matrix& n);
 
 	// count (double) algebraic cofactor
 	double algeCof(rowV::size_type i, colV::size_type j);
@@ -103,11 +107,14 @@ public:
 	Matrix eigen();
 
 	//矩阵对角化
-	Matrix diagonalize(Matrix &m);
+	Matrix diagonalize(Matrix& m);
 
 	//矩阵上三角化
 	Matrix upperize();
 
 	//求秩
 	int getRank();
+
+	//列遍历求第一个非零元素
+	xy getxy();
 };

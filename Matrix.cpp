@@ -344,9 +344,7 @@ Matrix Matrix::diagonalize(Matrix &m)
 	return Matrix();
 }
 
-//TODO:
-//r*c阶矩阵的上三角化
-//
+//TODO:r*c阶矩阵的上三角化
 Matrix Matrix::upperize()
 {
 	return Matrix();
@@ -354,5 +352,30 @@ Matrix Matrix::upperize()
 
 //求秩
 int Matrix::getRank() {
+	return 0;
+}
 
+xy Matrix::getxy() {
+	xy _xy;
+	if (row[0][0] != 0 || abs(row[0][0]) > 1e-6) {
+		_xy.x = 0;
+		_xy.y = 0;
+		return _xy;
+	}
+	else {
+		Matrix mt = this->TMatrix();
+		for (rowV::size_type i = 0; i != mt.row.size(); ++i) {
+			for (colV::size_type j = 0; j != mt.row[0].size(); ++j) {
+				if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
+					_xy.x = j;
+					_xy.y = i;
+					return _xy;
+				}
+			}
+		}
+		//这里应该发出异常,但是不知道怎么处理	
+		_xy.x = 0;
+		_xy.y = 0;
+		return _xy;
+	}
 }
