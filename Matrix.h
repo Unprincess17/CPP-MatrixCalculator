@@ -8,6 +8,9 @@ typedef struct xy {
 	colV::size_type y;
 }xy;
 
+#define horizontal 1
+#define vertical 0
+
 class Matrix {
 private:
 	vector<vector<double>> row;
@@ -66,10 +69,10 @@ public:
 	bool issquare();
 
 	// change rowm and rown
-	void changeRow(int i, int j);
+	void changeRow(rowV::size_type i, rowV::size_type j);
 
 	// change colm and coln
-	void changeCol(int i, int j);
+	void changeCol(colV::size_type i, colV::size_type j);
 
 	void addRow(rowV::size_type rownew, rowV::size_type rowold);
 
@@ -107,7 +110,7 @@ public:
 	Matrix eigen();
 
 	//calculate the stepped(?) Matrix
-	Matrix Step();
+	Matrix step();
 
 	//矩阵对角化
 	Matrix diagonalize(Matrix& m);
@@ -119,5 +122,5 @@ public:
 	int getRank();
 
 	//列遍历求第一个非零元素
-	xy getxy();
+	xy getxy(bool method = vertical,rowV::size_type x0 = 0,colV::size_type y0 = 0);
 };
