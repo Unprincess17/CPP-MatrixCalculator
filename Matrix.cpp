@@ -123,6 +123,7 @@ void Matrix::changeCol(colV::size_type i, colV::size_type j)
 	}
 }
 
+//save rownew as "rownew + rowold"
 void Matrix::addRow(rowV::size_type rownew, rowV::size_type rowold)
 {
 	if (rownew != rowold) {
@@ -320,43 +321,31 @@ Matrix Matrix::reverse()
 	return mr;
 }
 
-//分析：求秩、求上三角阵，实际上是在处理：怎么化简为阶梯型矩阵
-// 变化为阶梯型矩阵:
-// 1.判断应该按行还是按列计算（是否需要tranpose）->依据：row.size()和row[0].size()比较
-// 2.假设正常（行>列），寻找第一个元素不为0的一行（首先判断row[0][0]是否为0，若不是，则遍历第一列，寻找第一个元素不为0的一行，将其余第0行交换
-// 2'.如果第一列所有元素都是0，则查找第二列...也就是说，逐列查找第一个不为0的元素，若找到，返回他的行标，列标
-// 3.用这个元素将该列剩余元素置0，也就是说，只用调整从返回的行标往下的元素
-// 4.从上一个不为0的元素的下一列进行操作，重复3-4，直到处理到最后一列
-//		本征值、对角化是处理相同的问题
 //get stepped Matrix
 Matrix Matrix::step()
 {
-	//row>col,竖矩阵
+	//1.列查找第一个不为0的元素，返回xy
+	//2.用这个元素将该列其他元素置零
+	//3.继续查找下一个不为零的元素
 	if (row.size() == row[0].size() || row.size() > row[0].size()) {
 		Matrix mstep = this->TMatrix();
-		//行遍历，看是否到达最后一行
-		for (rowV::size_type t1 = 0; t1 != mstep.row.size(); ++t1) {
-			xy _xy = this->getxy();
-			mstep.changeCol(_xy.x, 0);
-			for (colV::size_type t = _xy.x + 1; t != mstep.row[0].size(); ++t) {
-				if (abs(mstep.row[0][t]) > (1 / 1024)) {
-
+		for (xy _xy; _xy.x != row.size()-1 && _xy.y != row[0].size()-1; _xy = this->getxy(_xy)) {
+			mstep.changeRow(_xy.x, 0);
+			for (rowV::size_type t = _xy.x + 1; t != mstep.row.size(); ++t) {
+				if (mstep.row[t][_xy.y] != 0 || abs(mstep.row[t][_xy.y]) > 1 >> 1024) {
+					mstep.multiRow(t, -(mstep.row[_xy.x][_xy.y] / mstep.row[t][_xy.y]));
+					mstep.addRow(t, _xy.x);
 				}
 			}
-
-			return mstep;
+			mstep.multiRow(_xy.x, (1 / mstep.row[_xy.x][_xy.y]));
 		}
-		
+		return mstep;
 	}
 	else {
 		Matrix mstep(row);
 
 		return mstep;
 	}
-
-
-	
-;
 }
 
 //TODO: 
@@ -402,7 +391,7 @@ xy Matrix::getxy(xy xy_t /* = (0,0) */, bool method /*= vertical*/) {
 		else {
 			Matrix mt = this->TMatrix();
 			for (rowV::size_type i = xy_t.x; i != mt.row.size(); ++i) {
-				for (colV::size_type j = xy_t.y; j != mt.row[0].size(); ++j) {
+				for (colV::size_type j = xy_t.y+1; j != mt.row[0].size(); ++j) {
 					if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
 						_xy.x = j;
 						_xy.y = i;
@@ -425,7 +414,7 @@ xy Matrix::getxy(xy xy_t /* = (0,0) */, bool method /*= vertical*/) {
 		else {
 			Matrix mt(row);
 			for (rowV::size_type i = xy_t.x; i != mt.row.size(); ++i) {
-				for (colV::size_type j = xy_t.y; j != mt.row[0].size(); ++j) {
+				for (colV::size_type j = xy_t.y+1; j != mt.row[0].size(); ++j) {
 					if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
 						_xy.x = i;
 						_xy.y = j;

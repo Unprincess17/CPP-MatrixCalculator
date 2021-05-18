@@ -19,6 +19,7 @@ int main() {
 	tuple1.y = 1;
 	cout << "vertical " << "x: " << m2.getxy().x << "y: " << m2.getxy().y << endl;
 	cout << "vertical " << "x: " << m2.getxy(m2.getxy()).x << "y: " << m2.getxy(m2.getxy()).y << endl;
+	cout << endl<< "m2" << endl;
 	m2.TMatrix().show();
 	/*Matrix m3 = m2.reverse();
 	m3.show();
@@ -30,6 +31,7 @@ int main() {
 	m3.show();
 	m3.multiRow(2, 2);
 	m3.show();*/
+	cout << endl << "m3 = m2.step()" << endl;
 	Matrix m3 = m2.step();
 	m3.show();
 	
