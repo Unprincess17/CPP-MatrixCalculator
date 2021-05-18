@@ -389,18 +389,20 @@ int Matrix::getRank() {
 }
 
 //默认列遍历，用horizontal则行遍历
-xy Matrix::getxy(bool method/*= vertical*/, rowV::size_type x/* = 0*/, colV::size_type/* y = 0*/) {
+xy Matrix::getxy(xy xy_t /* = (0,0) */, bool method /*= vertical*/) {
 	xy _xy;
+
 	if (method == vertical) {
-		if (row[0][0] != 0 || abs(row[0][0]) > (1/1024)) {
+		if (row[0][0] != 0 || abs(row[0][0]) > (1 / 1024)) {
 			_xy.x = 0;
 			_xy.y = 0;
 			return _xy;
 		}
+
 		else {
 			Matrix mt = this->TMatrix();
-			for (rowV::size_type i = 0; i != mt.row.size(); ++i) {
-				for (colV::size_type j = 0; j != mt.row[0].size(); ++j) {
+			for (rowV::size_type i = xy_t.x; i != mt.row.size(); ++i) {
+				for (colV::size_type j = xy_t.y; j != mt.row[0].size(); ++j) {
 					if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
 						_xy.x = j;
 						_xy.y = i;
@@ -422,8 +424,8 @@ xy Matrix::getxy(bool method/*= vertical*/, rowV::size_type x/* = 0*/, colV::siz
 		}
 		else {
 			Matrix mt(row);
-			for (rowV::size_type i = 0; i != mt.row.size(); ++i) {
-				for (colV::size_type j = 0; j != mt.row[0].size(); ++j) {
+			for (rowV::size_type i = xy_t.x; i != mt.row.size(); ++i) {
+				for (colV::size_type j = xy_t.y; j != mt.row[0].size(); ++j) {
 					if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
 						_xy.x = i;
 						_xy.y = j;
@@ -438,3 +440,6 @@ xy Matrix::getxy(bool method/*= vertical*/, rowV::size_type x/* = 0*/, colV::siz
 		}
 	}
 }
+	
+	
+

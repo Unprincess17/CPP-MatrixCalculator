@@ -4,8 +4,8 @@ using namespace std;
 typedef vector<vector<double>> rowV;
 typedef vector<double> colV;
 typedef struct xy {
-	rowV::size_type x;
-	colV::size_type y;
+	rowV::size_type x = 0;
+	colV::size_type y = 0;
 }xy;
 
 #define horizontal 1
@@ -121,6 +121,7 @@ public:
 	//求秩
 	int getRank();
 
+	
 	//列遍历求第一个非零元素
-	xy getxy(bool method = vertical,rowV::size_type x0 = 0,colV::size_type y0 = 0);
+	xy getxy(xy xy_t = xy(), bool method = vertical);
 };
