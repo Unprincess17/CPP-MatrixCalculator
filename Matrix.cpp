@@ -7,6 +7,16 @@
 
 using namespace std;
 
+bool Matrix::operator!= (const xy& compare) {
+
+	if (this->xyend.x != compare.x&&this->xyend.y != compare.y) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 //check the Matrix 's integrity
 void Matrix::check()
 {
@@ -156,7 +166,7 @@ void Matrix::multiRow(rowV::size_type rownum, double scale)
 {
 	if (rownum >= 0 && rownum <= row.size()) {
 		for (rowV::size_type i = 0; i != row.size(); ++i) {
-			row[i][rownum] *= scale;
+			row[rownum][i] *= scale;
 		}
 	}
 	else {
@@ -327,17 +337,21 @@ Matrix Matrix::step()
 	//1.列查找第一个不为0的元素，返回xy
 	//2.用这个元素将该列其他元素置零
 	//3.继续查找下一个不为零的元素
+
+	//1.注意：第i行返回的元素应该放在第i列的位置
 	if (row.size() == row[0].size() || row.size() > row[0].size()) {
-		Matrix mstep = this->TMatrix();
-		for (xy _xy; _xy.x != row.size()-1 && _xy.y != row[0].size()-1; _xy = this->getxy(_xy)) {
-			mstep.changeRow(_xy.x, 0);
+		Matrix mstep(row);
+		for (xy _xy = getxy(); mstep != _xy; _xy = getxy(_xy)) {
+			mstep.changeRow(_xy.x, _xy.y);
 			for (rowV::size_type t = _xy.x + 1; t != mstep.row.size(); ++t) {
-				if (mstep.row[t][_xy.y] != 0 || abs(mstep.row[t][_xy.y]) > 1 >> 1024) {
-					mstep.multiRow(t, -(mstep.row[_xy.x][_xy.y] / mstep.row[t][_xy.y]));
-					mstep.addRow(t, _xy.x);
+				if (mstep.row[t][_xy.y] != 0 || abs(mstep.row[t][_xy.y]) >1e-6) {
+					double tmpt = mstep.row[t][_xy.y];
+					double tmpy = mstep.row[_xy.y][_xy.y];
+					mstep.multiRow(_xy.y, -(tmpt / tmpy));
+					mstep.addRow(t, _xy.y);
+					mstep.multiRow(_xy.y, -(tmpy / tmpt));
 				}
 			}
-			mstep.multiRow(_xy.x, (1 / mstep.row[_xy.x][_xy.y]));
 		}
 		return mstep;
 	}

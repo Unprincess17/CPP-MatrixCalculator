@@ -14,23 +14,29 @@ typedef struct xy {
 class Matrix {
 private:
 	vector<vector<double>> row;
-
+	xy xyend;
+	
 public:
+	//redefine "!=" for xyend
+	bool operator != (const xy& compare);
+
 	//Default Constructor, Generate [[0.0]]
 	Matrix() {
 		colV col;
 		col.push_back(0.0);
 		row.push_back(col);
+		xyend.x = 0;
+		xyend.y = 0;
 	}
 
 	//Constructor for square matrix(rownum * rownum)
 	Matrix(int rownum) {
-		{
-			for (int i = 0; i != rownum; ++i) {
-				colV colrow(rownum, 0.0);
-				row.push_back(colrow);
-			}
+		for (int i = 0; i != rownum; ++i) {
+			colV colrow(rownum, 0.0);
+			row.push_back(colrow);
 		}
+		xyend.x = rownum-1;
+		xyend.y = rownum-1;
 	}
 
 	//Constructor for Matrix O(rownum*colnum)
@@ -40,17 +46,25 @@ public:
 			colV colrow(colnum, 0.0);
 			row.push_back(colrow);
 		}
+		xyend.x = rownum-1;
+		xyend.y = colnum-1;
 	}
 
 	//Constructor for well-defined Matrix, Parameters: rowV _col
 	Matrix(rowV _row) :
 		row(_row)
-	{}
+	{
+		xyend.x = row.size()-1;
+		xyend.y = row[0].size()-1;
+	}
 
 	//Constructor for well-defined Matrix, Parameters: Matrix m
 	Matrix(const Matrix& m) :
 		row(m.row)
-	{}
+	{
+		xyend.x = row.size()-1;
+		xyend.y = row[0].size()-1;
+	}
 
 
 	//check, and conpensate for the offset
