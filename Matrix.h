@@ -17,9 +17,6 @@ private:
 	xy xyend;
 	
 public:
-	//redefine "!=" for xyend
-	bool operator != (const xy& compare);
-
 	//Default Constructor, Generate [[0.0]]
 	Matrix() {
 		colV col;
@@ -137,5 +134,7 @@ public:
 
 	
 	//列遍历求第一个非零元素
-	xy getxy(xy xy_t = xy(), bool method = vertical);
+	xy getxy(xy xy_t , bool method = vertical);
+
+	xy getxy(bool method = vertical);
 };

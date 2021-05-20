@@ -7,16 +7,6 @@
 
 using namespace std;
 
-bool Matrix::operator!= (const xy& compare) {
-
-	if (this->xyend.x != compare.x&&this->xyend.y != compare.y) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 //check the Matrix 's integrity
 void Matrix::check()
 {
@@ -339,27 +329,20 @@ Matrix Matrix::step()
 	//3.继续查找下一个不为零的元素
 
 	//1.注意：第i行返回的元素应该放在第i列的位置
-	if (row.size() == row[0].size() || row.size() > row[0].size()) {
-		Matrix mstep(row);
-		for (xy _xy = getxy(); mstep != _xy; _xy = getxy(_xy)) {
-			mstep.changeRow(_xy.x, _xy.y);
-			for (rowV::size_type t = _xy.x + 1; t != mstep.row.size(); ++t) {
-				if (mstep.row[t][_xy.y] != 0 || abs(mstep.row[t][_xy.y]) >1e-6) {
-					double tmpt = mstep.row[t][_xy.y];
-					double tmpy = mstep.row[_xy.y][_xy.y];
-					mstep.multiRow(_xy.y, -(tmpt / tmpy));
-					mstep.addRow(t, _xy.y);
-					mstep.multiRow(_xy.y, -(tmpy / tmpt));
-				}
+	Matrix mstep(row);
+	for (xy _xy = getxy(); ( mstep.xyend.x != _xy.x&&mstep.xyend.y != _xy.y) ; _xy = mstep.getxy(_xy)) {
+		mstep.changeRow(_xy.x, _xy.y);
+		for (rowV::size_type t = _xy.x + 1; t != mstep.row.size(); ++t) {
+			if (mstep.row[t][_xy.y] != 0 || abs(mstep.row[t][_xy.y]) > 1e-6) {
+				double tmpt = mstep.row[t][_xy.y];
+				double tmpy = mstep.row[_xy.y][_xy.y];
+				mstep.multiRow(_xy.y, -(tmpt / tmpy));
+				mstep.addRow(t, _xy.y);
+				mstep.multiRow(_xy.y, -(tmpy / tmpt));
 			}
 		}
-		return mstep;
 	}
-	else {
-		Matrix mstep(row);
-
-		return mstep;
-	}
+	return mstep;
 }
 
 //TODO: 
@@ -392,32 +375,24 @@ int Matrix::getRank() {
 }
 
 //默认列遍历，用horizontal则行遍历
-xy Matrix::getxy(xy xy_t /* = (0,0) */, bool method /*= vertical*/) {
+xy Matrix::getxy(xy xy_t, bool method /*= vertical*/) {
 	xy _xy;
 
 	if (method == vertical) {
-		if (row[0][0] != 0 || abs(row[0][0]) > (1 / 1024)) {
-			_xy.x = 0;
-			_xy.y = 0;
-			return _xy;
-		}
-
-		else {
-			Matrix mt = this->TMatrix();
-			for (rowV::size_type i = xy_t.x; i != mt.row.size(); ++i) {
-				for (colV::size_type j = xy_t.y+1; j != mt.row[0].size(); ++j) {
-					if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
-						_xy.x = j;
-						_xy.y = i;
-						return _xy;
-					}
+		Matrix mt = this->TMatrix();
+		for (rowV::size_type i = xy_t.x; i != mt.row.size(); ++i) {
+			for (colV::size_type j = xy_t.y+1; j != mt.row[0].size(); ++j) {
+				if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
+					_xy.x = j;
+					_xy.y = i;
+					return _xy;
 				}
 			}
-			//这里应该发出异常,但是不知道怎么处理	
-			_xy.x = 0;
-			_xy.y = 0;
-			return _xy;
 		}
+		//这里应该发出异常,但是不知道怎么处理	
+		_xy.x = xyend.x;
+		_xy.y = xyend.y;
+		return _xy;
 	}
 	else if (method == horizontal) {
 		if (row[0][0] != 0 || abs(row[0][0]) > (1 / 1024)) {
@@ -444,5 +419,18 @@ xy Matrix::getxy(xy xy_t /* = (0,0) */, bool method /*= vertical*/) {
 	}
 }
 	
-	
-
+xy Matrix::getxy(bool method /*= vertical*/) {
+	xy _xy;
+	if (method == vertical) {
+		Matrix mt = this->TMatrix();
+		for (rowV::size_type i = 0; i != mt.row.size(); ++i) {
+			for (colV::size_type j = 0; j != mt.row[0].size(); ++j) {
+				if (mt.row[i][j] != 0 || abs(mt.row[i][j]) > 1e-6) {
+					_xy.x = j;
+					_xy.y = i;
+					return _xy;
+				}
+			}
+		}
+	}
+}
