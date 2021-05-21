@@ -79,6 +79,9 @@ public:
 	//Check if the Matrix is a square
 	bool issquare();
 
+	//check if the Matrix is a Zero
+	bool iszero();
+
 	// change rowm and rown
 	void changeRow(rowV::size_type i, rowV::size_type j);
 

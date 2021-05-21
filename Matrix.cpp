@@ -60,6 +60,18 @@ bool Matrix::issquare()
 	return issqure;
 }
 
+bool Matrix::iszero()
+{
+	for (rowV::size_type i = 0; i != row.size(); ++i) {
+		for (colV::size_type j = 0; j != row[0].size(); ++j) {
+			if (row[i][j] == 0 || abs(row[i][j] < 1e-6)) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 //Calculate the transpose matrix
 Matrix Matrix::TMatrix()
 {
@@ -330,19 +342,22 @@ Matrix Matrix::step()
 
 	//1.注意：第i行返回的元素应该放在第i列的位置
 	Matrix mstep(row);
-	for (xy _xy = getxy(); ( mstep.xyend.x != _xy.x&&mstep.xyend.y != _xy.y) ; _xy = mstep.getxy(_xy)) {
-		mstep.changeRow(_xy.x, _xy.y);
-		for (rowV::size_type t = _xy.x + 1; t != mstep.row.size(); ++t) {
-			if (mstep.row[t][_xy.y] != 0 || abs(mstep.row[t][_xy.y]) > 1e-6) {
-				double tmpt = mstep.row[t][_xy.y];
-				double tmpy = mstep.row[_xy.y][_xy.y];
-				mstep.multiRow(_xy.y, -(tmpt / tmpy));
-				mstep.addRow(t, _xy.y);
-				mstep.multiRow(_xy.y, -(tmpy / tmpt));
+	if(!mstep.iszero()){
+		for (xy _xy = getxy(); (mstep.xyend.x != _xy.x && mstep.xyend.y != _xy.y); _xy = mstep.getxy(_xy)) {
+			mstep.changeRow(_xy.x, _xy.y);
+			for (rowV::size_type t = _xy.x + 1; t != mstep.row.size(); ++t) {
+				if (mstep.row[t][_xy.y] != 0 || abs(mstep.row[t][_xy.y]) > 1e-6) {
+					double tmpt = mstep.row[t][_xy.y];
+					double tmpy = mstep.row[_xy.y][_xy.y];
+					mstep.multiRow(_xy.y, -(tmpt / tmpy));
+					mstep.addRow(t, _xy.y);
+					mstep.multiRow(_xy.y, -(tmpy / tmpt));
+				}
 			}
 		}
 	}
 	return mstep;
+	
 }
 
 //TODO: 
