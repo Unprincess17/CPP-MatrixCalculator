@@ -21,9 +21,12 @@ public:
 
     myQMatrix qml,qmr,qmoutput;
 
+signals:
+    void testui_back();
 
 private slots:
     void on_calculate_clicked();
+    void on_btn_back_clicked();
 
 private:
     Ui::testui *ui;

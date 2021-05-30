@@ -18,6 +18,8 @@ public:
 private slots:
     void on_btn_reverse_clicked();
 
+    void on_btn_linear_clicked();
+
 private:
     Ui::mainscene *ui;
 };

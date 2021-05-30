@@ -37,3 +37,10 @@ void reverseui::showresult(){
 
 }
 
+
+
+
+void reverseui::on_btn_back_clicked()
+{
+    emit reverseui_back();
+}

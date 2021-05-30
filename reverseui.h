@@ -20,10 +20,14 @@ public:
     myQMatrix qorigin, qreverse;
     inputui* inputpage = new inputui;
 
+signals:
+    void reverseui_back();
 
 private slots:
     void on_btn_input_clicked();
     void showresult();
+
+    void on_btn_back_clicked();
 
 private:
     Ui::reverseui *ui;

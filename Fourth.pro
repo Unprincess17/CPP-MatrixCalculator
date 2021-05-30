@@ -32,7 +32,8 @@ SOURCES += \
     myqmatrix.cpp \
     reverseui.cpp \
     morepage.cpp \
-    setpage.cpp
+    setpage.cpp \
+    linearpage.cpp
 
 
 HEADERS += \
@@ -43,7 +44,8 @@ HEADERS += \
     myqmatrix.h \
     reverseui.h \
     morepage.h \
-    setpage.h
+    setpage.h \
+    linearpage.h
 
 
 FORMS += \
@@ -52,7 +54,8 @@ FORMS += \
     inputui.ui \
     reverseui.ui \
     morepage.ui \
-    setpage.ui
+    setpage.ui \
+    linearpage.ui
 
 
 RESOURCES += \

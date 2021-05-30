@@ -66,3 +66,8 @@ void testui::on_calculate_clicked()
     outputshow->move(QPoint(50,290));
     outputshow->show();
 }
+
+void testui::on_btn_back_clicked()
+{
+    emit testui_back();
+}
