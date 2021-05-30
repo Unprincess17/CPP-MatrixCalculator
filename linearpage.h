@@ -19,8 +19,9 @@ class linearpage : public QWidget
 public:
     explicit linearpage(QWidget *parent = 0);
     ~linearpage();
-    //属性：算符，操作数1，操作数2（是矩阵或系数）
-    bool flag_operate,flag_operand;
+    //属性：算符，操作数1，操作数2（是矩阵或系数）（用operand区分）
+    bool flag_operand;
+    int flag_operate;
     myQMatrix m1,m2,moutput;
     double colf;
     inputui* m1_input,*m2_input;
@@ -38,7 +39,7 @@ private slots:
 
     void on_btn_left_clicked();
 
-    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_comboBox_currentIndexChanged(const int &index);
 
     void on_btn_right_matrix_clicked();
 

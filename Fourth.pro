@@ -33,7 +33,8 @@ SOURCES += \
     reverseui.cpp \
     morepage.cpp \
     setpage.cpp \
-    linearpage.cpp
+    linearpage.cpp \
+    stepui.cpp
 
 
 HEADERS += \
@@ -45,7 +46,8 @@ HEADERS += \
     reverseui.h \
     morepage.h \
     setpage.h \
-    linearpage.h
+    linearpage.h \
+    stepui.h
 
 
 FORMS += \
@@ -55,7 +57,8 @@ FORMS += \
     reverseui.ui \
     morepage.ui \
     setpage.ui \
-    linearpage.ui
+    linearpage.ui \
+    stepui.ui
 
 
 RESOURCES += \

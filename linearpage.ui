@@ -70,6 +70,12 @@
     </item>
     <item row="1" column="3">
      <widget class="QComboBox" name="comboBox">
+      <property name="editable">
+       <bool>false</bool>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
       <item>
        <property name="text">
         <string>+</string>

@@ -28,9 +28,9 @@ void linearpage::on_btn_back_clicked()
     emit linearpage_back();
 }
 
+//点击计算，读取算符(1,2,3,4)，操作数1，操作数2(0是矩阵，1是系数），进行计算
 void linearpage::on_btn_calculate_clicked()
 {
-    //点击计算，读取算符(1,2,3,4)，操作数1，操作数2(0是矩阵，1是系数），进行计算
     m1 = m1_input->qinput;
     //操作数2是矩阵
     if(flag_operand == 0){
@@ -54,6 +54,7 @@ void linearpage::on_btn_calculate_clicked()
     //操作数2是实数
     else{
         colf = number_qle->text().toDouble();
+        qDebug()<<QString::number(colf)<<QString::number(flag_operate);
         switch (flag_operate) {
         case 2:
             moutput = m1.scaleMulti(colf);
@@ -74,7 +75,7 @@ void linearpage::on_btn_calculate_clicked()
     outputshow = moutput.getTextEdit();
     outputshow->resize(240,200);
     outputshow->setParent(this);
-    outputshow->move(QPoint(50,290));
+    outputshow->move(QPoint(50,220));
     outputshow->show();
 }
 
@@ -84,9 +85,11 @@ void linearpage::on_btn_left_clicked()
     m1_input->show();
 }
 
-void linearpage::on_comboBox_currentIndexChanged(const QString &arg1)
+//算符赋值
+void linearpage::on_comboBox_currentIndexChanged(const int &index)
 {
-    flag_operate = ui->comboBox->currentIndex();//0是+，1是-,2是*，3是/
+    qDebug()<<QString::number(flag_operate)<<ui->comboBox->currentText()<<index;
+    flag_operate = index;//0是+，1是-,2是*，3是/
 }
 
 
