@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>stepui</class>
- <widget class="QWidget" name="stepui">
+ <class>input_dlg</class>
+ <widget class="QDialog" name="input_dlg">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>310</width>
-    <height>504</height>
+    <width>323</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Dialog</string>
   </property>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>40</x>
      <y>20</y>
-     <width>271</width>
-     <height>71</height>
+     <width>251</width>
+     <height>78</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="label">
       <property name="text">
-       <string>行数：</string>
+       <string>行数:</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QSpinBox" name="spinbox_row"/>
-    </item>
-    <item row="0" column="2" rowspan="2">
-     <widget class="QPushButton" name="btn_input">
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
+     <widget class="QSpinBox" name="rowspin"/>
     </item>
     <item row="1" column="0">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="label_2">
       <property name="text">
        <string>列数：</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QSpinBox" name="spinbox_col"/>
+     <widget class="QSpinBox" name="colspin"/>
+    </item>
+    <item row="0" column="2" rowspan="2">
+     <widget class="QPushButton" name="btn_bulid">
+      <property name="text">
+       <string>生成</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="btn_back">
+  <widget class="QPushButton" name="btn_input">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>120</x>
      <y>450</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>返回</string>
+    <string>确定</string>
    </property>
   </widget>
  </widget>

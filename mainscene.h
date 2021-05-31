@@ -2,7 +2,8 @@
 #define MAINSCENE_H
 
 #include <QMainWindow>
-#include<reverseui.h>
+#include "reverseui.h"
+#include "stepui.h"
 namespace Ui {
 class mainscene;
 }
@@ -19,6 +20,8 @@ private slots:
     void on_btn_reverse_clicked();
 
     void on_btn_linear_clicked();
+
+    void on_pushButton_step_clicked();
 
 private:
     Ui::mainscene *ui;

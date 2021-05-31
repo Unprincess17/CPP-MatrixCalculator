@@ -7,7 +7,9 @@ testui::testui(QWidget *parent) :
     ui(new Ui::testui)
 {
     ui->setupUi(this);
-
+    qml = myQMatrix();
+    qmr = myQMatrix();
+    qmoutput = myQMatrix();
     inputui *inputpage_left = new inputui;
     inputui *inputpage_right = new inputui;
 
@@ -37,10 +39,6 @@ testui::testui(QWidget *parent) :
        qmr = myQMatrix(inputpage_right->qinput);
     });
 
-
-
-
-
 }
 
 testui::~testui()
@@ -58,7 +56,6 @@ void testui::on_calculate_clicked()
     cout<<"qmoutput"<<endl;
     qmoutput = qml.matrixMulti(qmr);
     qmoutput.show();
-//    QTextEdit* outputshow = qmoutput.getTextEdit();
     QTextEdit* outputshow = new QTextEdit;
     outputshow = qmoutput.getTextEdit();
     outputshow->resize(240,200);

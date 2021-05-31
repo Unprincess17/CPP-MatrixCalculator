@@ -56,3 +56,16 @@ void mainscene::on_btn_linear_clicked()
        this->show();
     });
 }
+
+void mainscene::on_pushButton_step_clicked()
+{
+    this->hide();
+    stepui* steppage = new stepui;
+    steppage->setWindowTitle("矩阵阶梯化");
+    steppage->show();
+    connect(steppage,&stepui::step_back,[=](){
+       delete steppage;
+        this->show();
+    });
+
+}

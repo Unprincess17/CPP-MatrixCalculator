@@ -34,7 +34,8 @@ SOURCES += \
     morepage.cpp \
     setpage.cpp \
     linearpage.cpp \
-    stepui.cpp
+    stepui.cpp \
+    input_dlg.cpp
 
 
 HEADERS += \
@@ -47,7 +48,8 @@ HEADERS += \
     morepage.h \
     setpage.h \
     linearpage.h \
-    stepui.h
+    stepui.h \
+    input_dlg.h
 
 
 FORMS += \
@@ -58,7 +60,8 @@ FORMS += \
     morepage.ui \
     setpage.ui \
     linearpage.ui \
-    stepui.ui
+    stepui.ui \
+    input_dlg.ui
 
 
 RESOURCES += \
